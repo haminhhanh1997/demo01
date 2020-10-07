@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">    
+    <body> 
+        <referenceContainer name="header.container">
+            <!-- <referenceContainer name=" header.panel.wrapper" remove="true"/> -->
+            <block class="Magento\Customer\Block\Account\Navigation" name="header_top" template="Magento_Theme::shipping.phtml" before="-">
+            </block>
+        </referenceContainer>
+        <referenceBlock name="logo" remove="true"/>
+         <referenceContainer name="header.panel.wrapper" remove="true"/>
+        <referenceContainer name="header-wrapper" htmlClass="container header content">
+            <container name="header-row" htmlClass="row header-wrapper__row" htmlTag="div">
+                <block class="Magento\Theme\Block\Html\Header\Logo" name="content" template="Magento_Theme::nav-toggle.phtml" before="-">
+                </block>
+                <block class="Magento\Theme\Block\Html\Header\Logo" name="title-logo" template="Magento_Theme::title-logo.phtml" >
+                </block>
+                <block class="Magento\Theme\Block\Html\Header\Logo" name="heart" template="Magento_Theme::icon-heart.phtml" after="title-logo" >
+                </block>
+            </container>
+        </referenceContainer>
+         <referenceContainer name="page.top">
+            <block class="Magento\Theme\Block\Html\Header\Logo" name="bottom-header" template="Magento_Theme::bottom.phtml" after="title-logo" >
+            </block>
+        </referenceContainer>
+        <referenceContainer name="footer-container" >
+            <container htmlTag="div" htmlClass="contact" before="-">
+                <block class="Magento\Cms\Block\Block">
+                    <arguments>
+                        <argument name="block_id" xsi:type="string">test1</argument>
+                    </arguments>
+                </block>
+            </container>
+        </referenceContainer>
+        <move element="top.search" destination="header-row" after="content"/>
+        <move element="minicart" destination="header-row" after="heart"/>
+    </body>
+</page>    
