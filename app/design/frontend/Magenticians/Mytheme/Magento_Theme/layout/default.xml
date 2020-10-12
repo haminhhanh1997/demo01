@@ -19,8 +19,7 @@
             </container>
         </referenceContainer>
          <referenceContainer name="page.top">
-            <block class="Magento\Theme\Block\Html\Header\Logo" name="bottom-header" template="Magento_Theme::bottom.phtml" after="title-logo" >
-            </block>
+            <block class="Magento\Theme\Block\Html\Topmenu" name="topnav.custom" template="Magento_Theme::html/topmenu_custom.phtml" after="navigation.sections"/>
         </referenceContainer>
         <referenceContainer name="footer-container" >
             <container htmlTag="div" htmlClass="contact" before="-">
@@ -30,8 +29,39 @@
                     </arguments>
                 </block>
             </container>
+            <referenceContainer name="footer">
+                <container name="subscribe-comment" htmlTag="div" htmlClass="footer-title" before="form.subscribe">
+                    <block class="Magento\Framework\View\Element\Text" name="subscribe-text">
+                        <arguments>
+                            <argument name="text" xsi:type="string">Sign up now for our newsletter and get $5 off the next order</argument>
+                        </arguments>
+                    </block>
+                </container>
+            </referenceContainer>
+             <referenceContainer name="footer-container">
+                <referenceBlock name="footer_links" remove="true" >
+                </referenceBlock>
+            </referenceContainer>
+            <container htmlTag="div" htmlClass="footer-bottom container" before="footer-container" >
+                <container htmlTag="div" htmlClass="footer-menu">
+                    <block class="Magento\Cms\Block\Block" >
+                        <arguments>
+                            <argument name="block_id" xsi:type="string">menu-footer</argument>
+                        </arguments>
+                    </block>
+                </container>
+                <container htmlTag="div" htmlClass="footer-carosel" >
+                    <block name="footer-carosel" template="Magento_Theme::footer-carosel.phtml"  >
+                    </block>
+                    <!-- <block class="Magento\Cms\Block\Block" >
+                        <arguments>
+                            <argument name="block_id" xsi:type="string">footer-carosel</argument>
+                        </arguments>
+                    </block> -->
+                </container>
+            </container>
         </referenceContainer>
-        <move element="top.search" destination="header-row" after="content"/>
+        <move element="top.search" destination="header-row" before="content"/>
         <move element="minicart" destination="header-row" after="heart"/>
     </body>
 </page>    

@@ -1,4 +1,4 @@
-a:4:{s:4:"hash";s:0:"";s:5:"mtime";i:1602061329;s:6:"expire";i:9999999999;s:4:"tags";s:37:"a73_LAYOUT_GENERAL_CACHE_TAG,a73_MAGE";}
+a:4:{s:4:"hash";s:0:"";s:5:"mtime";i:1602468872;s:6:"expire";i:9999999999;s:4:"tags";s:37:"a73_LAYOUT_GENERAL_CACHE_TAG,a73_MAGE";}
 <?xml version="1.0"?>
 <layouts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><handle id="catalog_category_view"><body/>
 </handle><handle id="catalogsearch_advanced_index"><body/>
@@ -6839,6 +6839,11 @@ a:4:{s:4:"hash";s:0:"";s:5:"mtime";i:1602061329;s:6:"expire";i:9999999999;s:4:"t
       </arguments>
    </referenceBlock>
 </body>
+</handle><handle id="hello_index_helloworld" layout="1column"><body>
+   <referenceContainer name="content">
+      <block class="Magetop\Helloworld\Block\Index" name="hello_index_helloworld" template="Magetop_Helloworld::hello.phtml"/>
+   </referenceContainer>
+</body>
 </handle><handle id="braintree_googlepay_review" layout="1column"><head>
    <title>Review Order</title>
 </head>
@@ -7162,6 +7167,81 @@ a:4:{s:4:"hash";s:0:"";s:5:"mtime";i:1602061329;s:6:"expire";i:9999999999;s:4:"t
    <css src="css/print.css" media="print"/>
    <meta name="format-detection" content="telephone=no"/>
 </head>
+</handle><handle id="default"><body>
+   <referenceContainer name="header.panel">
+      <block class="Magento\Framework\View\Element\Html\Links" name="header.links">
+         <arguments>
+            <argument name="css_class" xsi:type="string">header links</argument>
+         </arguments>
+      </block>
+   </referenceContainer>
+   <referenceContainer name="footer">
+      <block class="Magento\Store\Block\Switcher" name="store_switcher" as="store_switcher" after="footer_links" template="Magento_Store::switch/stores.phtml"/>
+   </referenceContainer>
+   <referenceBlock name="report.bugs" remove="true"/>
+   <move element="copyright" destination="before.body.end"/>
+</body>
+</handle><handle id="default_head_blocks"><head>
+   <meta name="viewport" content="width=device-width, initial-scale=1"/>
+   <font src="fonts/opensans/light/opensans-300.woff2"/>
+   <font src="fonts/opensans/regular/opensans-400.woff2"/>
+   <font src="fonts/opensans/semibold/opensans-600.woff2"/>
+   <font src="fonts/opensans/bold/opensans-700.woff2"/>
+   <font src="fonts/Luma-Icons.woff2"/>
+</head>
+</handle><handle id="customer_account" layout="2columns-left"><body>
+   <referenceBlock name="sidebar.main.account_nav">
+      <arguments>
+         <argument name="block_title" translate="true" xsi:type="string">My Account</argument>
+         <argument name="block_css" xsi:type="string">block-collapsible-nav</argument>
+      </arguments>
+   </referenceBlock>
+   <move element="page.main.title" destination="content.top" before="-"/>
+</body>
+</handle><handle id="default"><body>
+   <referenceBlock name="header.links">
+      <block class="Magento\Customer\Block\Account\Customer" name="customer" template="Magento_Customer::account/customer.phtml" before="-"/>
+      <block class="Magento\Customer\Block\Account\AuthorizationLink" name="authorization-link-login" template="Magento_Customer::account/link/authorization.phtml">
+         <arguments>
+            <argument name="sortOrder" xsi:type="number">10</argument>
+         </arguments>
+      </block>
+   </referenceBlock>
+   <move element="header" destination="header.links" before="-"/>
+   <move element="register-link" destination="header.links"/>
+   <move element="top.links" destination="customer"/>
+   <move element="authorization-link" destination="top.links" after="-"/>
+</body>
+</handle><handle id="catalog_product_view" layout="1column"><body>
+   <move element="page.main.title" destination="product.info.main" before="-"/>
+   <move element="product.info.stock.sku" destination="product.info.price" after="product.price.final"/>
+   <move element="product.info.review" destination="product.info.main" before="product.info.price"/>
+</body>
+</handle><handle id="default"><body>
+   <referenceContainer name="header-wrapper">
+      <container name="compare-link-wrapper" label="Compare Link Wrapper" as="compare-link-wrapper" after="top.search" htmlTag="ul" htmlClass="compare wrapper">
+         <block class="Magento\Framework\View\Element\Template" name="catalog.compare.link" before="-" template="Magento_Catalog::product/compare/link.phtml">
+            <arguments>
+               <argument name="jsLayout" xsi:type="array">
+                  <item name="components" xsi:type="array">
+                     <item name="compareProducts" xsi:type="array">
+                        <item name="component" xsi:type="string">Magento_Catalog/js/view/compare-products</item>
+                     </item>
+                  </item>
+               </argument>
+            </arguments>
+         </block>
+      </container>
+   </referenceContainer>
+</body>
+</handle><handle id="checkout_cart_index" layout="1column"><body>
+   <referenceContainer name="checkout.cart.container">
+      <container name="cart.discount" label="Cart Discount Container" htmlTag="div" htmlClass="cart-discount" after="-"/>
+   </referenceContainer>
+   <move element="checkout.cart.crosssell" destination="checkout.cart.container" after="-"/>
+   <move element="checkout.cart.coupon" destination="cart.discount"/>
+   <move element="checkout.cart.shortcut.buttons" destination="checkout.cart.methods" after="checkout.cart.methods.onepage.bottom"/>
+</body>
 </handle><handle id="default" layout="1column"><body>
         
    </body>
@@ -7183,8 +7263,7 @@ a:4:{s:4:"hash";s:0:"";s:5:"mtime";i:1602061329;s:6:"expire";i:9999999999;s:4:"t
       </container>
    </referenceContainer>
    <referenceContainer name="page.top">
-      <block class="Magento\Theme\Block\Html\Header\Logo" name="bottom-header" template="Magento_Theme::bottom.phtml" after="title-logo">
-            </block>
+      <block class="Magento\Theme\Block\Html\Topmenu" name="topnav.custom" template="Magento_Theme::html/topmenu_custom.phtml" after="navigation.sections"/>
    </referenceContainer>
    <referenceContainer name="footer-container">
       <container htmlTag="div" htmlClass="contact" before="-">
@@ -7194,15 +7273,45 @@ a:4:{s:4:"hash";s:0:"";s:5:"mtime";i:1602061329;s:6:"expire";i:9999999999;s:4:"t
             </arguments>
          </block>
       </container>
+      <referenceContainer name="footer">
+         <container name="subscribe-comment" htmlTag="div" htmlClass="footer-title" before="form.subscribe">
+            <block class="Magento\Framework\View\Element\Text" name="subscribe-text">
+               <arguments>
+                  <argument name="text" xsi:type="string">Sign up now for our newsletter and get $5 off the next order</argument>
+               </arguments>
+            </block>
+         </container>
+      </referenceContainer>
+      <referenceContainer name="footer-container">
+         <referenceBlock name="footer_links" remove="true">
+                </referenceBlock>
+      </referenceContainer>
+      <container htmlTag="div" htmlClass="footer-bottom container" before="footer-container">
+         <container htmlTag="div" htmlClass="footer-menu">
+            <block class="Magento\Cms\Block\Block">
+               <arguments>
+                  <argument name="block_id" xsi:type="string">menu-footer</argument>
+               </arguments>
+            </block>
+         </container>
+         <container htmlTag="div" htmlClass="footer-carosel">
+            <block class="Magento\Cms\Block\Block">
+               <arguments>
+                  <argument name="block_id" xsi:type="string">footer-carosel</argument>
+               </arguments>
+            </block>
+         </container>
+      </container>
    </referenceContainer>
-   <move element="top.search" destination="header-row" after="content"/>
+   <move element="top.search" destination="header-row" before="content"/>
    <move element="minicart" destination="header-row" after="heart"/>
 </body>
 </handle><handle id="default_head_blocks"><head>
    <css src="css/title-logo.css"/>
    <css src="https://use.fontawesome.com/releases/v5.7.1/css/all.css" src_type="url"/>
-   <link src_type="url" rel="stylesheet" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"/>
    <script src_type="url" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"/>
+   <link src_type="url" rel="stylesheet" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
 </head>
 </handle><handle id="customer_account_confirmation" layout="1column"><body>
    <referenceBlock name="accountConfirmation" remove="true"/>

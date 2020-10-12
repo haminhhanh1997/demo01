@@ -1,0 +1,1 @@
+/var/www/html/magento3/app/design/frontend/Magenticians/Mytheme/web/js/owl.carousel.js
